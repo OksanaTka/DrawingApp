@@ -16,6 +16,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.provider.Settings
+import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.Toast
@@ -271,7 +272,7 @@ class MainActivity : AppCompatActivity() {
         val brushSize10 = bindingDialog.brushIBTNSize10
         val brushSize15 = bindingDialog.brushIBTNSize15
         val brushSize20 = bindingDialog.brushIBTNSize20
-        val brushSize25 = bindingDialog.brushIBTNSize20
+        val brushSize25 = bindingDialog.brushIBTNSize25
         val brushSize30 = bindingDialog.brushIBTNSize30
 
 
@@ -285,6 +286,8 @@ class MainActivity : AppCompatActivity() {
             changeBrushSize(20, brushDialog)
         }
         brushSize25.setOnClickListener {
+            Log.d("brushsizewhat","size clicked: 25")
+
             changeBrushSize(25, brushDialog)
         }
         brushSize30.setOnClickListener {
@@ -295,6 +298,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun changeBrushSize(brushSize: Int, brushDialog: Dialog) {
+        Log.d("brushsizewhat","size: $brushSize")
         binding.mainVWLayout.setSizeForBrush(brushSize.toFloat())
         brushDialog.dismiss()
     }
