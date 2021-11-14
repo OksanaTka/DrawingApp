@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="3dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:gravity="start"
+        android:padding="10dp"
+        android:paddingStart="5dp"
+        android:text="Select brush size"
+        android:textSize="23sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="10dp"
+        android:background="@android:color/darker_gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/brush_IBTN_size10"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="image_small"
+            android:tag="10"
+            android:src="@drawable/brush_size_10" />
+
+        <ImageButton
+            android:id="@+id/brush_IBTN_size15"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="image_small"
+            android:src="@drawable/brush_size_15" />
+
+        <ImageButton
+            android:id="@+id/brush_IBTN_size20"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="image_medium"
+            android:src="@drawable/brush_size_20" />
+
+        <ImageButton
+            android:id="@+id/brush_IBTN_size25"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="image_small"
+            android:src="@drawable/brush_size_25" />
+
+        <ImageButton
+            android:id="@+id/brush_IBTN_size30"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="image_large"
+            android:src="@drawable/brush_size_30" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.HomeActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/home_background">
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/home_LBL_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50sp"
+        android:text="pick a color"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
+
+    <com.thebluealliance.spectrum.SpectrumPalette
+        android:id="@+id/home_SP_palette"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/home_LBL_text"
+        android:layout_marginTop="20dp"
+        android:paddingStart="6dp"
+        android:paddingEnd="6dp"
+        app:spectrum_colors="@array/colors_plate" />
+
+
+    <ImageView
+        android:layout_above="@+id/home_SP_palette"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitEnd"
+        android:layout_marginBottom="5dp"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/img_brush" />
+
+</RelativeLayout>
