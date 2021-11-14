@@ -22,7 +22,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
-import com.example.kidsdrawingapp.Objects.ImageFile
+import com.example.kidsdrawingapp.objects.ImageFile
 import com.example.kidsdrawingapp.databinding.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -35,11 +35,10 @@ import java.io.FileOutputStream
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var bindingDialog: DialogBrushSizeBinding
-    private lateinit var binding_progress_custom: DialogCustomProgressBinding
-    private lateinit var binding_select_color: DialogSelectColorBinding
+    private lateinit var bindingProgressCustom: DialogCustomProgressBinding
+    private lateinit var bindingSelectColor: DialogSelectColorBinding
     private var color = 0;
     private val imageFile = ImageFile(this)
-    private var mImageButtonCurrentPaint: ImageButton? = null
 
     private var permissions = arrayOf(
         Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -123,11 +122,11 @@ class MainActivity : AppCompatActivity() {
     private fun dialogSelectAColor() {
         val customProgressDialog = Dialog(this)
         //init dialog view
-        binding_select_color = DialogSelectColorBinding.inflate(layoutInflater)
-        customProgressDialog.setContentView(binding_select_color.root)
+        bindingSelectColor = DialogSelectColorBinding.inflate(layoutInflater)
+        customProgressDialog.setContentView(bindingSelectColor.root)
         customProgressDialog.show()
         //listener for color select
-        binding_select_color.mainSPSelectColor.setOnColorSelectedListener { col ->
+        bindingSelectColor.mainSPSelectColor.setOnColorSelectedListener { col ->
             color = col
             //init brush color and button color
             binding.mainVWLayout.setColor(color)
@@ -223,8 +222,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showProgressDialog(customProgressDialog: Dialog) {
-        binding_progress_custom = DialogCustomProgressBinding.inflate(layoutInflater)
-        customProgressDialog.setContentView(binding_progress_custom.root)
+        bindingProgressCustom = DialogCustomProgressBinding.inflate(layoutInflater)
+        customProgressDialog.setContentView(bindingProgressCustom.root)
         customProgressDialog.show()
     }
 
@@ -340,7 +339,6 @@ class MainActivity : AppCompatActivity() {
             }
         } else {
             //below android 11
-            // ActivityCompat.requestPermissions(this, permissions, 30)
             requestStoragePermissionLauncher.launch(permissions)
         }
     }
@@ -417,49 +415,4 @@ class MainActivity : AppCompatActivity() {
             }
         builder.create().show()
     }
-
-//    override fun onRequestPermissionsResult(
-//        requestCode: Int,
-//        permissions: Array<out String>,
-//        grantResults: IntArray
-//    ) {
-//        super.onRequestPermissionsResult(
-//            requestCode,
-//            permissions,
-//            grantResults
-//        )
-//
-//        when (requestCode) {
-//            30 -> {
-//                if (grantResults.isNotEmpty()) {
-//                    val readPer =
-//                        grantResults[0] == PackageManager.PERMISSION_GRANTED
-//                    val writePer =
-//                        grantResults[1] == PackageManager.PERMISSION_GRANTED
-//                    if (readPer && writePer) {
-//                        Toast.makeText(
-//                            this,
-//                            "Permission Granted",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                    } else {
-//                        Toast.makeText(
-//                            this,
-//                            "Permission Denied",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                    }
-//                }
-//            }
-//            else -> {
-//                Toast.makeText(
-//                    this,
-//                    "You Denied Permission",
-//                    Toast.LENGTH_SHORT
-//                ).show()
-//            }
-//        }
-//    }
-
-
 }

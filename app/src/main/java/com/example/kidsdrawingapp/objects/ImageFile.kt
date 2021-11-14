@@ -1,11 +1,9 @@
-package com.example.kidsdrawingapp.Objects
+package com.example.kidsdrawingapp.objects
 
 import android.content.Context
 import android.net.Uri
-import android.util.Log
 import androidx.core.content.FileProvider
 import java.io.File
-import kotlin.math.log
 
 class ImageFile(private val context: Context) {
 
