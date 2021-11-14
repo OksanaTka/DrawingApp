@@ -3,16 +3,16 @@ Drawing application for all ages
 
 | Open app                  | Select a color          |      
 :-------------------------:|:-------------------------:
-![](gifs/1.open_app.gif| width="400" height="790")  | ![](gifs/2.select_color.gif)
+<img src= "gifs/1.open_app.gif" width="177" height="384">  | <img src= "gifs/2.select_color.gif" width="177" height="384">
 
 
 
 | Select brush size        | Redo / Undo              |      
 :-------------------------:|:-------------------------:
-![](gifs/3.select_brush_size.gif)  | ![](gifs/4.redo_undo.gif)
+<img src= "gifs/3.select_brush_size.gif" width="177" height="384">  |<img src= "gifs/4.redo_undo.gif" width="177" height="384">
 
 
 
 | Add background           | Save and Share           |      
 :-------------------------:|:-------------------------:
-![](gifs/5.add_background.gif)  | ![](gifs/6.share.gif)
+<img src= "gifs/5.add_background.gif" width="177" height="384">  | <img src= "gifs/6.share.gif" width="177" height="384">
