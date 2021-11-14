@@ -23,10 +23,6 @@ class HomeActivity : AppCompatActivity() {
             col -> color = col
             openMainActivity();
         }
-        Log.d("whichColor","$color")
-
-      //  binding.homeSPPalette.setSelectedColor(resources.getColor(R.color.white))
-
     }
 
     private fun openMainActivity() {
