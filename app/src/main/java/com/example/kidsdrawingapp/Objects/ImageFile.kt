@@ -1,4 +1,4 @@
-package com.example.kidsdrawingapp
+package com.example.kidsdrawingapp.Objects
 
 import android.content.Context
 import android.net.Uri
@@ -9,7 +9,7 @@ import kotlin.math.log
 
 class ImageFile(private val context: Context) {
 
-    private var name: String = "KidDrawingApp_"
+    private var name: String = "DrawingApp_"
     private val type: String = ".jpg"
     private var creationTime: String = ""
     var uri: Uri? = null

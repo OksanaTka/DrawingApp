@@ -14,9 +14,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
-import android.provider.MediaStore
 import android.provider.Settings
-import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.Toast
@@ -24,7 +22,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
-import com.example.kidsdrawingapp.ImageFile
+import com.example.kidsdrawingapp.Objects.ImageFile
 import com.example.kidsdrawingapp.databinding.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,8 +30,6 @@ import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 
 
 class MainActivity : AppCompatActivity() {
@@ -286,7 +282,6 @@ class MainActivity : AppCompatActivity() {
             changeBrushSize(20, brushDialog)
         }
         brushSize25.setOnClickListener {
-            Log.d("brushsizewhat","size clicked: 25")
 
             changeBrushSize(25, brushDialog)
         }
@@ -298,7 +293,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun changeBrushSize(brushSize: Int, brushDialog: Dialog) {
-        Log.d("brushsizewhat","size: $brushSize")
         binding.mainVWLayout.setSizeForBrush(brushSize.toFloat())
         brushDialog.dismiss()
     }
