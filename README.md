@@ -13,6 +13,6 @@ Drawing application for all ages
 
 
 
-| Add background           | Save and Share           |      
+| Add background and Save  |  Share           |      
 :-------------------------:|:-------------------------:
 <img src= "gifs/5.add_background.gif" width="177" height="384">  | <img src= "gifs/6.share.gif" width="177" height="384">
