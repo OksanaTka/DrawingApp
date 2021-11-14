@@ -1,5 +1,5 @@
 ## DrawingApp
-Drawing application for all ages
+A kotlin drawing application for all ages.
 
 | Open app                  | Select a color          |      
 :-------------------------:|:-------------------------:
