@@ -3,7 +3,7 @@ Drawing application for all ages
 
 | Open app                  | Select a color          |      
 :-------------------------:|:-------------------------:
-![](gifs/1.open_app.gif| width=50)  | ![](gifs/2.select_color.gif)
+![](gifs/1.open_app.gif| width="400" height="790")  | ![](gifs/2.select_color.gif)
 
 
 
