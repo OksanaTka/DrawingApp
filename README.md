@@ -1,18 +1,18 @@
-# DrawingApp
+## DrawingApp
 Drawing application for all ages
 
 | Open app                  | Select a color          |      
 :-------------------------:|:-------------------------:
-![](gifs/1.open app.gif)  | ![](gifs/2. pick a color.gif)
+![](gifs/1.open_app.gif)  | ![](gifs/2.select_color.gif)
 
 
 
 | Select brush size        | Redo / Undo              |      
 :-------------------------:|:-------------------------:
-![](gifs/3.brash size.gif)  | ![](gifs/4. undoredo.gif)
+![](gifs/3.select_brush_size.gif)  | ![](gifs/4.redo_undo.gif)
 
 
 
 | Add background           | Save and Share           |      
 :-------------------------:|:-------------------------:
-![](gifs/5.add background.gif)  | ![](gifs/6.share.gif)
+![](gifs/5.add_background.gif)  | ![](gifs/6.share.gif)
