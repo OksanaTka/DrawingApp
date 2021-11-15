@@ -1,5 +1,5 @@
 ## DrawingApp
-An android drawing application for all ages. It comes with 5 different brush sizes, includes color adjustments, undo and redo buttons, import images from the gallery and export your drawings to JPEG. It has an intuitive and user-friendly interface. 
+An android drawing application for all ages. It comes with 5 different brush sizes, includes color picker using Spectrum library, undo and redo buttons, import images from the gallery and export your drawings to JPEG. It has an intuitive and user-friendly interface. 
 
 | Open app                  | Select a color          |      
 :-------------------------:|:-------------------------:
