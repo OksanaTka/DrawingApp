@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.Settings
+import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.Toast
@@ -22,8 +23,10 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import com.example.kidsdrawingapp.R
 import com.example.kidsdrawingapp.objects.ImageFile
 import com.example.kidsdrawingapp.databinding.*
+import com.thebluealliance.spectrum.SpectrumPalette
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -33,11 +36,9 @@ import java.io.FileOutputStream
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var bindingDialog: DialogBrushSizeBinding
-    private lateinit var bindingProgressCustom: DialogCustomProgressBinding
-    private lateinit var bindingSelectColor: DialogSelectColorBinding
-    private var color = 0;
+    private var binding: ActivityMainBinding? = null
+    private var bindingSelectColor: DialogSelectColorBinding? = null
+
     private val imageFile = ImageFile(this)
 
     private var permissions = arrayOf(
@@ -54,9 +55,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(binding?.root)
 
-        getColorFromHomeActivity()
         initPaintMode()
         initButtons()
     }
@@ -64,12 +64,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun initButtons() {
         //choose brush size
-        binding.mainIBTNBrush.setOnClickListener {
+        binding?.mainIBTNBrush?.setOnClickListener {
             showBrushSizeChooserDialog()
         }
 
         //pick image for background
-        binding.mainIBTNGallery.setOnClickListener {
+        binding?.mainIBTNGallery?.setOnClickListener {
             if (checkPermission()) {
                 replaceImageLauncher.launch("image/*")
             } else {
@@ -78,17 +78,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         // undo last paint
-        binding.mainIBTNUndo.setOnClickListener {
-            binding.mainVWLayout.onClickUndo()
+        binding?.mainIBTNUndo?.setOnClickListener {
+            binding?.mainVWLayout?.onClickUndo()
         }
 
         // redo last paint
-        binding.mainIBTNRedo.setOnClickListener {
-            binding.mainVWLayout.onClickRedo()
+        binding?.mainIBTNRedo?.setOnClickListener {
+            binding?.mainVWLayout?.onClickRedo()
         }
 
         //save image
-        binding.mainIBTNSave.setOnClickListener {
+        binding?.mainIBTNSave?.setOnClickListener {
             if (checkPermission()) {
                 saveImage()
             } else {
@@ -97,10 +97,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         //shae image
-        binding.mainIBTNShare.setOnClickListener {
-            if(imageFile.uri != null){
+        binding?.mainIBTNShare?.setOnClickListener {
+            if (imageFile.uri != null) {
                 share()
-            }else{
+            } else {
                 Toast.makeText(
                     this@MainActivity,
                     "Please save the file first",
@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         //select color
-        binding.mainIBTNColorPicker.setOnClickListener {
+        binding?.mainIBTNColorPicker?.setOnClickListener {
             dialogSelectAColor()
         }
     }
@@ -123,30 +123,32 @@ class MainActivity : AppCompatActivity() {
         val customProgressDialog = Dialog(this)
         //init dialog view
         bindingSelectColor = DialogSelectColorBinding.inflate(layoutInflater)
-        customProgressDialog.setContentView(bindingSelectColor.root)
+        customProgressDialog.setContentView(bindingSelectColor!!.root)
         customProgressDialog.show()
+
         //listener for color select
-        bindingSelectColor.mainSPSelectColor.setOnColorSelectedListener { col ->
-            color = col
+        Log.d("coloSP", "SpectrumPalette")
+
+        bindingSelectColor?.mainSPSelectColor?.setOnColorSelectedListener { col ->
             //init brush color and button color
-            binding.mainVWLayout.setColor(color)
-            binding.mainIBTNColorPicker.backgroundTintList = ColorStateList.valueOf(color)
+            binding?.mainVWLayout?.setColor(col)
+            binding?.mainIBTNColorPicker?.backgroundTintList = ColorStateList.valueOf(col)
             customProgressDialog.dismiss()
         }
     }
 
     //
-    private fun getColorFromHomeActivity() {
+    private fun getColorFromHomeActivity(): Int {
         val colorStr = intent.getStringExtra(OPEN_COLOR)
         if (colorStr != null) {
-            color = colorStr.toInt()
+            return colorStr.toInt()
         }
+        return Color.BLACK
     }
 
     private fun saveImage() {
-        // myBitmapAsyncTask(getBitmapFromView(binding.mainFLDrawingViewContainer))
         lifecycleScope.launch {
-            saveBitmapFile(getBitmapFromView(binding.mainFLDrawingViewContainer))
+            saveBitmapFile(getBitmapFromView(binding?.mainFLDrawingViewContainer!!))
         }
     }
 
@@ -222,8 +224,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showProgressDialog(customProgressDialog: Dialog) {
-        bindingProgressCustom = DialogCustomProgressBinding.inflate(layoutInflater)
-        customProgressDialog.setContentView(bindingProgressCustom.root)
+        customProgressDialog.setContentView(R.layout.dialog_custom_progress)
         customProgressDialog.show()
     }
 
@@ -250,8 +251,9 @@ class MainActivity : AppCompatActivity() {
      */
     private fun initPaintMode() {
         //set color-picker button background
-        binding.mainVWLayout.setColor(color)
-        binding.mainIBTNColorPicker.backgroundTintList = ColorStateList.valueOf(color)
+        val color: Int = getColorFromHomeActivity()
+        binding?.mainVWLayout?.setColor(color)
+        binding?.mainIBTNColorPicker?.backgroundTintList = ColorStateList.valueOf(color)
     }
 
 
@@ -260,15 +262,13 @@ class MainActivity : AppCompatActivity() {
      */
     private fun showBrushSizeChooserDialog() {
         val brushDialog = Dialog(this)
-        // bind  dialog_brash_size
-        bindingDialog = DialogBrushSizeBinding.inflate(layoutInflater)
-        brushDialog.setContentView(bindingDialog.root)
+        brushDialog.setContentView(R.layout.dialog_brush_size)
 
-        val brushSize10 = bindingDialog.brushIBTNSize10
-        val brushSize15 = bindingDialog.brushIBTNSize15
-        val brushSize20 = bindingDialog.brushIBTNSize20
-        val brushSize25 = bindingDialog.brushIBTNSize25
-        val brushSize30 = bindingDialog.brushIBTNSize30
+        val brushSize10: ImageButton = brushDialog.findViewById(R.id.brush_IBTN_size10)
+        val brushSize15: ImageButton = brushDialog.findViewById(R.id.brush_IBTN_size15)
+        val brushSize20: ImageButton = brushDialog.findViewById(R.id.brush_IBTN_size20)
+        val brushSize25: ImageButton = brushDialog.findViewById(R.id.brush_IBTN_size25)
+        val brushSize30: ImageButton = brushDialog.findViewById(R.id.brush_IBTN_size30)
 
 
         brushSize10.setOnClickListener {
@@ -292,7 +292,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun changeBrushSize(brushSize: Int, brushDialog: Dialog) {
-        binding.mainVWLayout.setSizeForBrush(brushSize.toFloat())
+        binding?.mainVWLayout?.setSizeForBrush(brushSize.toFloat())
         brushDialog.dismiss()
     }
 
@@ -363,8 +363,8 @@ class MainActivity : AppCompatActivity() {
     val replaceImageLauncher =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             if (uri != null) {
-                binding.mainIMPBackground.visibility = View.VISIBLE
-                binding.mainIMPBackground.setImageURI(uri)
+                binding?.mainIMPBackground?.visibility = View.VISIBLE
+                binding?.mainIMPBackground?.setImageURI(uri)
             }
         }
 
@@ -414,5 +414,11 @@ class MainActivity : AppCompatActivity() {
                 dialog.dismiss()
             }
         builder.create().show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
+        bindingSelectColor = null
     }
 }

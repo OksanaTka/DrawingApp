@@ -11,15 +11,15 @@ class HomeActivity : AppCompatActivity() {
 
     private var color = 0
 
-    private lateinit var binding: ActivityHomeBinding
+    private var binding: ActivityHomeBinding? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(binding?.root)
 
-        binding.homeSPPalette.setOnColorSelectedListener {
+        binding?.homeSPPalette?.setOnColorSelectedListener {
             col -> color = col
             openMainActivity();
         }
@@ -31,5 +31,10 @@ class HomeActivity : AppCompatActivity() {
         }
         startActivity(intent)
         finish()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 }
